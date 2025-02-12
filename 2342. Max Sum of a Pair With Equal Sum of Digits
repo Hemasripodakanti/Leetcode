@@ -1,0 +1,27 @@
+class Solution:
+    def maximumSum(self, nums: List[int]) -> int:
+        def sum_of_digits(n):
+            return sum(int(digit) for digit in str(n))
+        
+        # Dictionary to store numbers grouped by their sum of digits
+        digit_sum_map = {}
+        
+        # Group numbers by their sum of digits
+        for num in nums:
+            digit_sum = sum_of_digits(num)
+            if digit_sum not in digit_sum_map:
+                digit_sum_map[digit_sum] = []
+            digit_sum_map[digit_sum].append(num)
+        
+        # Initialize the maximum sum to -1
+        max_sum = -1
+        
+        # Iterate through each group
+        for group in digit_sum_map.values():
+            if len(group) > 1:
+                # Sort the group in descending order
+                group.sort(reverse=True)
+                # Check the sum of the two largest numbers
+                max_sum = max(max_sum, group[0] + group[1])
+        
+        return max_sum
