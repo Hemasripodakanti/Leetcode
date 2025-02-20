@@ -1,0 +1,18 @@
+class Solution:
+    def isHappy(self, n: int) -> bool:
+        visitedlist=set()
+        visitedlist.add(n)
+        while True:
+            total=0
+            while n:
+                r=n%10
+                total+=r*r
+                n=n//10
+            if total==1:
+                return True
+            if total in visitedlist:
+                return False  
+            visitedlist.add(total)
+            n=total              
+
+        
